@@ -1,0 +1,30 @@
+[33m21d0751[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Merge remote-tracking branch 'origin/main'
+[33mddbb17c[m improve classes names and added JPA relationships
+[33m06f04ab[m Delete frontend
+[33mdf05c4a[m Delete node_modules
+[33maa21bad[m Add files via upload
+[33m04998d3[m Add files via upload
+[33m2817113[m Delete docker directory
+[33me4aa004[m Delete backend directory
+[33m60b4307[m Delete backend/src/main/java/repository
+[33mc9cf8c3[m Create repository
+[33m201bb4d[m Update LanguageName.java
+[33mbd2066c[m Update LanguageIsoCode.java
+[33md70eb3f[m Update LanguageFamily.java
+[33m23d4dbe[m Update User.java
+[33me6196f0[m Update UploadedFileType.java
+[33m01eeded[m Update Quote.java
+[33me015a19[m Update Message.java
+[33m6e259a9[m Update Language.java
+[33m3c3dc3e[m Update Job.java
+[33mbeadf8e[m Update ContactAttempt.java
+[33meaf8213[m Update ClientUploadedFile.java
+[33m71cfba0[m improve classes names and added JPA relationships
+[33m1253056[m couple of Entities and helpers added with proper JPA anotattions
+[33md660a90[m Delete .idea directory
+[33m15c1a07[m Delete Lumine-Translations-main directory
+[33md209e3b[m Merge branch 'main' of https://github.com/drivemy730/Lumine-Translations
+[33m5af9ff1[m Refactor: move UserRole to helpers package and add Quotes,User and Documents model
+[33m42da05f[m created first entity, user
+[33m44e25ec[m Restored project files and added Docker setup
+[33m4805beb[m initial spring boot project setup

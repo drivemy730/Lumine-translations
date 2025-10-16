@@ -1,0 +1,45 @@
+package com.lumine.helpers;
+
+public enum ClientFileTypeCategory
+{
+        LEGAL_CONTRACT,
+        COURT_DOCUMENT,
+        IMMIGRATION_DOCUMENT,
+        PATENT_APPLICATION,
+
+        MEDICAL_RECORD,
+        CLINICAL_TRIAL,
+        PHARMACEUTICAL_LABEL,
+        HEALTHCARE_REPORT,
+
+        USER_MANUAL,
+        ENGINEERING_SPEC,
+        SOFTWARE_DOCUMENTATION,
+        TECHNICAL_REPORT,
+
+        FINANCIAL_STATEMENT,
+        INVESTOR_PROSPECTUS,
+        BUSINESS_EMAIL,
+        MARKETING_MATERIAL,
+
+        WEBSITE_CONTENT,
+        SOCIAL_MEDIA_COPY,
+        BROCHURE,
+
+        BOOK,
+        POETRY,
+        VIDEO_SUBTITLE,
+
+        LEGISLATION,
+        POLICY_REPORT,
+        DIPLOMATIC_NOTE,
+
+        RESEARCH_PAPER,
+        ACADEMIC_THESIS,
+        CONFERENCE_PRESENTATION,
+
+        CERTIFIED_TRANSLATION,
+        NOTARIZED_TRANSLATION
+
+
+}
