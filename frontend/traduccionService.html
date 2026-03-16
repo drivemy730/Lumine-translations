@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veyager2 - Subir Documento</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos base (consistentes con la página anterior) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Cinzel", serif;
+    }
+
+    :root {
+      --primary-bg: #0a0a0a;
+      --secondary-bg: #121212;
+      --accent-blue: #4a90e2;
+      --accent-green: #2ecc71;
+      --accent-gold: #FFD700;
+      --text-light: #f0f0f0;
+      --text-muted: #999;
+      --border-color: #222;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--primary-bg), #1a1a1a);
+      color: #eaeaea;
+      min-height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: var(--accent-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: #b0b0b0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* Contenedor principal */
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 1024px) {
+      .main-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Sección de upload */
+    .upload-section {
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .upload-section:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 30px rgba(74, 144, 226, 0.1);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #f0f0f0, #aaa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    /* Área de upload */
+    .upload-area {
+      border: 2px dashed var(--border-color);
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      margin: 2rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .upload-area:hover {
+      border-color: var(--accent-blue);
+      background: rgba(74, 144, 226, 0.05);
+    }
+
+    .upload-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-blue);
+    }
+
+    .upload-text {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .upload-hint {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .browse-btn {
+      display: inline-block;
+      background: var(--accent-blue);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .browse-btn:hover {
+      background: #3a7bc8;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(58, 123, 200, 0.3);
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    /* Sección del carrito */
+    .cart-section {
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .cart-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-title i {
+      color: var(--accent-gold);
+    }
+
+    .cart-items {
+      margin-bottom: 2rem;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+    }
+
+    .item-details {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .item-price {
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--border-color);
+      font-size: 1.2rem;
+    }
+
+    .total-label {
+      font-weight: 600;
+    }
+
+    .total-price {
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    /* Botón para agregar más documentos */
+    .add-more-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue);
+      padding: 0.8rem;
+      border-radius: 30px;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .add-more-btn:hover {
+      background: rgba(74, 144, 226, 0.1);
+    }
+
+    /* Opciones de contacto (mantenidas de la versión anterior) */
+    .options-section {
+      margin: 4rem 0;
+      grid-column: 1 / -1;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .option-card {
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-blue);
+    }
+
+    .option-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-card.whatsapp .option-icon {
+      color: #25D366;
+    }
+
+    .option-card.email .option-icon {
+      color: #D44638;
+    }
+
+    .option-card.signup .option-icon {
+      color: var(--accent-blue);
+    }
+
+    .option-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .option-desc {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-globe-americas"></i>
+      Veyager2 Translation
+    </div>
+    <nav class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">Translators</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <!-- Sección de upload -->
+    <section class="upload-section">
+      <h2 class="section-title">TRADUCCIÓN PROFESIONAL</h2>
+      <p class="section-subtitle">SUBE TU DOCUMENTO Y OBTÉN TU PRECIO.</p>
+      
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <h3 class="upload-text">ARRASTRA & SUELTA TU DOCUMENTO AQUÍ</h3>
+        <p class="upload-hint">Formatos compatibles: PDF, DOC, DOCX (Max 20MB)</p>
+        <button class="browse-btn">Adjuntar documentos</button>
+        <input type="file" id="file-input">
+      </div>
+    </section>
+
+    <!-- Sección del carrito -->
+    <aside class="cart-section fade-in" id="cartSection">
+      <h3 class="cart-title">
+        <i class="fas fa-shopping-cart"></i>
+        TU COTIZACIÓN
+      </h3>
+      
+      <div class="cart-items">
+        <!-- Ejemplo de documento en el carrito -->
+        <div class="cart-item">
+          <div class="item-info">
+            <div class="item-name">Contrato Legal.pdf</div>
+            <div class="item-details">
+              <span>Inglés → Español</span> • 
+              <span>Legal</span>
+            </div>
+          </div>
+          <div class="item-price">$45.00</div>
+        </div>
+        
+        <!-- Puedes agregar más items dinámicamente -->
+      </div>
+      
+      <div class="cart-total">
+        <span class="total-label">Total:</span>
+        <span class="total-price">$45.00</span>
+      </div>
+      
+      <button class="add-more-btn" id="addMoreBtn">
+        <i class="fas fa-plus"></i> SUBIR MÁS DOCUMENTOS
+      </button>
+    </aside>
+
+    <!-- Opciones de contacto (mantenidas de la versión anterior) -->
+    <section class="options-section" id="optionsSection">
+      <h2 class="section-title">OPCIONES DE CONTACTO</h2>
+      <p class="section-subtitle">Elige cómo deseas continuar con tu solicitud de traducción</p>
+      
+      <div class="options-grid">
+        <!-- Opción 1: WhatsApp -->
+        <div class="option-card whatsapp">
+          <div class="option-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <h3 class="option-title">WhatsApp</h3>
+          <p class="option-desc">Conéctate directamente con nuestro equipo para una cotización inmediata.</p>
+          <button class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+          </button>
+        </div>
+        
+        <!-- Opción 2: Email -->
+        <div class="option-card email">
+          <div class="option-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3 class="option-title">Correo Electrónico</h3>
+          <p class="option-desc">Recibe una cotización detallada con opciones de traductores.</p>
+          <button class="email-btn">
+            <i class="fas fa-paper-plane"></i> Enviar Solicitud
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2023 Veyager2 Translation Services. Traducciones certificadas en 50+ idiomas.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("file-input");
+      const cartSection = document.getElementById("cartSection");
+      const addMoreBtn = document.getElementById("addMoreBtn");
+      
+      // Simular subida de documento (mock)
+      uploadArea.addEventListener("click", () => {
+        fileInput.click();
+      });
+      
+      fileInput.addEventListener("change", function(e) {
+        if (this.files && this.files[0]) {
+          // Mostrar el carrito con animación
+          cartSection.style.display = "block";
+          cartSection.classList.add("fade-in");
+          
+          // Aquí iría la lógica para calcular el precio y mostrar la cotización
+          // Por ahora usamos datos mock
+        }
+      });
+      
+      // Redirigir para agregar más documentos
+      addMoreBtn.addEventListener("click", function() {
+        window.location.href = "informacion-documento.html";
+      });
+      
+      // Simulación: Ocultar carrito inicialmente
+      cartSection.style.display = "none";
+    });
+  </script>
+</body>
+</html>

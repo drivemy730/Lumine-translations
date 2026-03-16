@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veyager2 - Upload Documents</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Cinzel", serif;
+    }
+
+    :root {
+      --primary-bg: #0a0a0a;
+      --secondary-bg: #121212;
+      --accent-blue: #4a90e2;
+      --accent-green: #2ecc71;
+      --text-light: #f0f0f0;
+      --text-muted: #999;
+      --border-color: #222;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--primary-bg), #1a1a1a);
+      color: #eaeaea;
+      min-height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: var(--accent-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: #b0b0b0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .upload-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 3rem;
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      overflow: visible;
+    }
+
+    .form-container {
+      border: 1px solid var(--border-color);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-container:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(74, 144, 226, 0.1);
+    }
+
+    .page-title {
+      font-size: 2.2rem;
+      margin-bottom: 2.5rem;
+      background: linear-gradient(to right, #f0f0f0, #aaa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Form Styles */
+    .language-form {
+      display: grid;
+      gap: 3rem;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 3rem;
+    }
+
+    @media (min-width: 600px) {
+      .form-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .form-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .form-label.required::after {
+      content: " *";
+      color: #e74c3c;
+    }
+
+    .custom-select {
+      position: relative;
+    }
+
+    .custom-select select {
+      width: 100%;
+      padding: 0.75rem 4.5rem 0.75rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: #1a1a1a;
+      color: var(--text-light);
+      font-size: 1rem;
+      appearance: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .custom-select select:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .custom-select select:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    }
+
+    .custom-select::after {
+      content: "▼";
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    /* Continue Button Section */
+    .continue-section {
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      display: none;
+    }
+
+    .continue-btn {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 1.2rem 3.5rem;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .continue-btn:hover {
+      background: #3a7bc8;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(58, 123, 200, 0.5);
+    }
+
+    .continue-btn:active {
+      transform: translateY(1px);
+    }
+
+    .continue-btn i {
+      font-size: 1.4rem;
+      transition: transform 0.3s ease;
+    }
+
+    .continue-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-globe-americas"></i>
+      Veyager2 Translation
+    </div>
+    <nav class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">Translators</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="upload-container">
+      <h1 class="page-title">INFORMACION DE TU DOCUMENTO</h1>
+
+      <div class="form-container">
+        <form class="language-form" id="languageForm">
+          <div class="form-row">
+            <!-- Source Language -->
+            <div class="form-group">
+              <label class="form-label required">LENGUAJE ORIGINAL DEL DOCUMENTO</label>
+              <div class="custom-select">
+                <select id="sourceLanguage" required>
+                  <option value="" disabled selected>🌐 LENGUAJE</option>
+                  <optgroup label="EN Inglés">
+                    <option value="ENGLISH">🌐 Inglés (Genérico)</option>
+                    <option value="AMERICAN_ENGLISH">🇺🇸 Inglés Americano</option>
+                    <option value="AUSTRALIAN_ENGLISH">🇦🇺 Inglés Australiano</option>
+                    <option value="CANADIAN_ENGLISH">🇨🇦 Inglés Canadiense</option>
+                    <option value="BRITISH_ENGLISH">🇬🇧 Inglés Británico</option>
+                    <option value="IRISH_ENGLISH">🇮🇪 Inglés Irlandés</option>
+                    <option value="INDIAN_ENGLISH">🇮🇳 Inglés Indio</option>
+                    <option value="SOUTH_AFRICAN_ENGLISH">🇿🇦 Inglés Sudafricano</option>
+                  </optgroup>
+                  <optgroup label="🇪🇸 Español">
+                    <option value="SPANISH">🌐 Español (Genérico)</option>
+                    <option value="SPANISH_ARGENTINA">🇦🇷 Español (Argentina)</option>
+                    <option value="SPANISH_BOLIVIA">🇧🇴 Español (Bolivia)</option>
+                    <option value="SPANISH_CHILE">🇨🇱 Español (Chile)</option>
+                    <option value="SPANISH_COLOMBIA">🇨🇴 Español (Colombia)</option>
+                    <option value="SPANISH_COSTA_RICA">🇨🇷 Español (Costa Rica)</option>
+                    <option value="SPANISH_DOMINICAN_REPUBLIC">🇩🇴 Español (República Dominicana)</option>
+                    <option value="SPANISH_ECUADOR">🇪🇨 Español (Ecuador)</option>
+                    <option value="SPANISH_SPAIN">🇪🇸 Español (España)</option>
+                    <option value="SPANISH_GUATEMALA">🇬🇹 Español (Guatemala)</option>
+                    <option value="SPANISH_HONDURAS">🇭🇳 Español (Honduras)</option>
+                    <option value="SPANISH_MEXICO">🇲🇽 Español (México)</option>
+                    <option value="SPANISH_NICARAGUA">🇳🇮 Español (Nicaragua)</option>
+                    <option value="SPANISH_PANAMA">🇵🇦 Español (Panamá)</option>
+                    <option value="SPANISH_PERU">🇵🇪 Español (Perú)</option>
+                    <option value="SPANISH_PUERTO_RICO">🇵🇷 Español (Puerto Rico)</option>
+                    <option value="SPANISH_PARAGUAY">🇵🇾 Español (Paraguay)</option>
+                    <option value="SPANISH_EL_SALVADOR">🇸🇻 Español (El Salvador)</option>
+                    <option value="SPANISH_US">🇺🇸 Español (Estados Unidos)</option>
+                    <option value="SPANISH_URUGUAY">🇺🇾 Español (Uruguay)</option>
+                    <option value="SPANISH_VENEZUELA">🇻🇪 Español (Venezuela)</option>
+                  </optgroup>
+                  <optgroup label="🇫🇷 Francés">
+                    <option value="FRENCH">🌐 Francés (Genérico)</option>
+                    <option value="FRENCH_BELGIUM">🇧🇪 Francés (Bélgica)</option>
+                    <option value="FRENCH_CANADA">🇨🇦 Francés (Canadá)</option>
+                    <option value="FRENCH_SWITZERLAND">🇨🇭 Francés (Suiza)</option>
+                    <option value="FRENCH_FRANCE">🇫🇷 Francés (Francia)</option>
+                    <option value="FRENCH_LUXEMBOURG">🇱🇺 Francés (Luxemburgo)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <!-- Target Language -->
+            <div class="form-group">
+              <label class="form-label required">LENGUAJE DESEADO</label>
+              <div class="custom-select">
+                <select id="targetLanguage" required>
+                  <option value="" disabled selected> 🌐 LENGUAJE </option>
+                  <option value="ENGLISH">English</option>
+                  <option value="SPANISH">Spanish</option>
+                  <option value="FRENCH">French</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Document Category -->
+            <div class="form-group">
+              <label class="form-label required">CATEGORÍA DEL DOCUMENTO</label>
+              <div class="custom-select">
+                <select id="docCategory" required>
+                  <option value="" disabled selected>📜 CATEGORÍA</option>
+                  <optgroup label="⚖️ Legal">
+                    <option value="LEGAL_CONTRACT">📜 Contrato Legal</option>
+                    <option value="COURT_DOCUMENT">🏛️ Documento Judicial</option>
+                    <option value="IMMIGRATION_DOCUMENT">🛂 Documento Migratorio</option>
+                    <option value="PATENT_APPLICATION">🧠 Solicitud de Patente</option>
+                    <option value="LEGISLATION">📚 Legislación</option>
+                    <option value="POLICY_REPORT">📑 Informe de Política</option>
+                    <option value="DIPLOMATIC_NOTE">✉️ Nota Diplomática</option>
+                  </optgroup>
+                  <optgroup label="🩺 Médico">
+                    <option value="MEDICAL_RECORD">📋 Historia Clínica</option>
+                    <option value="CLINICAL_TRIAL">🔬 Ensayo Clínico</option>
+                    <option value="PHARMACEUTICAL_LABEL">💊 Etiqueta Farmacéutica</option>
+                    <option value="HEALTHCARE_REPORT">🏥 Informe de Salud</option>
+                  </optgroup>
+                  <optgroup label="🛠️ Técnico">
+                    <option value="USER_MANUAL">📘 Manual de Usuario</option>
+                    <option value="ENGINEERING_SPEC">📐 Especificación Técnica</option>
+                    <option value="SOFTWARE_DOCUMENTATION">💻 Documentación de Software</option>
+                    <option value="TECHNICAL_REPORT">🧾 Informe Técnico</option>
+                  </optgroup>
+                  <optgroup label="💼 Negocios & Marketing">
+                    <option value="FINANCIAL_STATEMENT">📊 Estado Financiero</option>
+                    <option value="INVESTOR_PROSPECTUS">📈 Prospecto para Inversionistas</option>
+                    <option value="BUSINESS_EMAIL">📧 Correo Empresarial</option>
+                    <option value="MARKETING_MATERIAL">🎯 Material de Marketing</option>
+                    <option value="BROCHURE">📖 Folleto</option>
+                    <option value="SOCIAL_MEDIA_COPY">📱 Texto para Redes Sociales</option>
+                    <option value="WEBSITE_CONTENT">🌐 Contenido Web</option>
+                  </optgroup>
+                  <optgroup label="📚 Literatura & Cultura">
+                    <option value="BOOK">📗 Libro</option>
+                    <option value="POETRY">📝 Poesía</option>
+                    <option value="VIDEO_SUBTITLE">🎬 Subtítulo de Video</option>
+                  </optgroup>
+                  <optgroup label="🎓 Académico">
+                    <option value="RESEARCH_PAPER">📄 Artículo de Investigación</option>
+                    <option value="ACADEMIC_THESIS">📚 Tesis Académica</option>
+                    <option value="CONFERENCE_PRESENTATION">🎤 Presentación de Conferencia</option>
+                  </optgroup>
+                  <optgroup label="📑 Traducciones Oficiales">
+                    <option value="CERTIFIED_TRANSLATION">✅ Traducción Certificada</option>
+                    <option value="NOTARIZED_TRANSLATION">🖋️ Traducción Notariada</option>
+                  </optgroup>
+                  <optgroup label="🔍 Otro">
+                    <option value="OTHER">🗂️ Otro tipo de documento</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Botón de continuación -->
+      <div class="continue-section" id="continueSection">
+        <button class="continue-btn" id="continueBtn">
+          <i class="fas fa-arrow-right"></i>
+          CONTINUAR PARA COTIZAR
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2023 Veyager2 Translation Services. Certified translations in 50+ languages.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("languageForm");
+      const source = document.getElementById("sourceLanguage");
+      const target = document.getElementById("targetLanguage");
+      const category = document.getElementById("docCategory");
+      const continueSection = document.getElementById("continueSection");
+      const continueBtn = document.getElementById("continueBtn");
+
+      // Inicialmente ocultar la sección de continuación
+      continueSection.style.display = "none";
+
+      function checkForm() {
+        if (source.value && target.value && category.value) {
+          continueSection.style.display = "block";
+          continueSection.style.animation = "fadeIn 0.5s ease";
+        } else {
+          continueSection.style.display = "none";
+        }
+      }
+
+      // Verificar el formulario en cada cambio
+      source.addEventListener("change", checkForm);
+      target.addEventListener("change", checkForm);
+      category.addEventListener("change", checkForm);
+
+      // Redirigir al hacer clic en el botón de continuación
+      continueBtn.addEventListener("click", function() {
+        // Guardar selecciones
+        const selections = {
+          source: source.value,
+          target: target.value,
+          category: category.value
+        };
+        
+        // Guardar en sessionStorage para la siguiente página
+        sessionStorage.setItem("translationSelections", JSON.stringify(selections));
+        
+        // Redirigir a la página de cotización
+        window.location.href = "upload-document.html";
+      });
+
+      // Evitar envío del formulario
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>
