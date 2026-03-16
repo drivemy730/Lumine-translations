@@ -18,10 +18,8 @@ The platform allows translators to upload files, analyze translation requirement
 * 📄 Upload translation documents
 * 💰 Automatic translation quote generation
 * 🌍 English ↔ French translation support
-* ☁️ Secure cloud file storage
 * ⚡ Fast modern frontend
-* 🔐 Secure backend API
-* 🧠 Scalable architecture
+
 
 ---
 
@@ -131,5 +129,9 @@ http://localhost:8080
 * 📑 Support for additional document formats
 * 🌎 More language pairs
 * 💳 Payment integration for clients
+* ☁️ Secure cloud file storage
+* 🔐 Secure backend API
+* 🧠 Scalable architecture
+
 
 
