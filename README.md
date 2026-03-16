@@ -1,24 +1,26 @@
 # 🌐 Lumine Translations
 
-![Next.js](https://img.shields.io/badge/Frontend-Next.js-black?logo=next.js)
-![React](https://img.shields.io/badge/UI-React-blue?logo=react)
+![HTML5](https://img.shields.io/badge/Frontend-HTML5-orange?logo=html5)
+![CSS3](https://img.shields.io/badge/Styling-CSS3-blue?logo=css3)
+![JavaScript](https://img.shields.io/badge/Scripting-JavaScript-yellow?logo=javascript)
 ![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-green?logo=springboot)
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue?logo=postgresql)
 ![AWS S3](https://img.shields.io/badge/Storage-AWS%20S3-orange?logo=amazonaws)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-A **modern web application** for freelance translators to **generate translation quotes** for English and French documents.
+**Lumine Translations** is a platform for freelance translators to **generate translation quotes** for English and French documents.  
+The backend is fully functional (Spring Boot + PostgreSQL + AES + AWS S3), while the frontend is currently a **basic HTML/CSS/JS placeholder**.
 
-The platform allows translators to upload files, analyze translation requirements, and generate accurate quotes efficiently.
 
 ---
 
 # ✨ Features
 
-* 📄 Upload translation documents
-* 💰 Automatic translation quote generation
-* 🌍 English ↔ French translation support
-* ⚡ Fast modern frontend
+- 📄 Upload and parse translation documents (backend ready)
+- 📄 Return qoutes for customers (backend ready)
+- 🌍 English ↔ French translation support
+- ⚡ Backend fully functional
+- 🖥️ Frontend currently basic HTML/CSS/JS (non-functional)
 
 
 ---
@@ -93,19 +95,10 @@ cd Lumine-translations
 
 ## 2️⃣ Frontend Setup
 
-```bash
-cd front
-npm install
-npm run dev
-```
+The frontend is currently a static placeholder
 
-Runs the frontend locally at:
+Open front/index.html in a browser to view the UI
 
-```
-http://localhost:3000
-```
-
----
 
 ## 3️⃣ Backend Setup
 
@@ -125,6 +118,7 @@ http://localhost:8080
 # 🧭 Future Improvements
 
 * 👤 Translator accounts
+* ⚛️ Replace frontend with React / Next.js functional UI
 * 📊 Quote analytics dashboard
 * 📑 Support for additional document formats
 * 🌎 More language pairs
